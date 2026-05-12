@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voltixio Content Manager</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">voltixio.com</p>
+        <h1>⚡ Voltixio Content Manager</h1>
+        <p>Automate idea → AI video → publishing → GHL sync.</p>
+      </div>
+      <div class="top-actions">
+        <button id="demoFillBtn" class="btn secondary">Fill Demo Data</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="card steps">
+        <h2>Operator Checklist</h2>
+        <ol>
+          <li>Connect API keys and n8n webhook in Settings.</li>
+          <li>Create content jobs and wait until Completed.</li>
+          <li>Click <strong>Send to GHL</strong> in queue.</li>
+        </ol>
+        <p class="hint">Configured for GHL Location ID: <code>8BlvEgHfpyevZboFrRry</code>.</p>
+      </aside>
+
+      <section class="card form-card">
+        <h2>Create Content Job</h2>
+        <form id="jobForm" novalidate>
+          <div class="grid">
+            <label>Workspace <input type="text" id="workspace" required /></label>
+            <label>Video ID <input type="text" id="videoId" required /></label>
+            <label>Niche <input type="text" id="niche" required /></label>
+            <label>Priority
+              <select id="priority"><option>Normal</option><option>High</option><option>Urgent</option></select>
+            </label>
+          </div>
+
+          <label>Campaign Idea <textarea id="idea" rows="3" required></textarea></label>
+
+          <div class="grid">
+            <label>Image URL 1 <input type="url" id="url1" required /></label>
+            <label>Image URL 2 <input type="url" id="url2" required /></label>
+            <label>Image URL 3 <input type="url" id="url3" required /></label>
+          </div>
+
+          <details class="settings" open>
+            <summary>Connections & GHL Delivery</summary>
+            <div class="grid">
+              <label>OpenAI Key <input type="password" id="openaiKey" /></label>
+              <label>fal.ai Key <input type="password" id="falKey" /></label>
+              <label>Blotato Key <input type="password" id="blotatoKey" /></label>
+              <label>n8n Webhook URL <input type="url" id="n8nWebhookUrl" value="https://n8n.voltixio.com/webhook/fe696ec2-ea68-446e-ab1a-3e0d2ce3eaab22dssdsds" /></label>
+              <label>GHL Location ID <input type="text" id="ghlLocationId" value="8BlvEgHfpyevZboFrRry" /></label>
+              <label>GHL Private Token <input type="password" id="ghlPit" placeholder="pit-..." /></label>
+            </div>
+          </details>
+
+          <div class="actions">
+            <button type="submit" class="btn primary">Launch Automation</button>
+            <button type="reset" class="btn ghost">Reset</button>
+          </div>
+          <p id="formMessage" class="message" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="card board">
+        <h2>Publishing Queue</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Video ID</th><th>Workspace</th><th>Status</th><th>Final URL</th><th>GHL</th>
+            </tr>
+          </thead>
+          <tbody id="jobsTableBody"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
